@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 
 import series.NumberSeries;
 import series.SimpleNumberSeriesDefinition;
+import series.inducers.BetterSimpleNumberSeriesInducer;
 import de.uni_bamberg.wiai.cogsys.tools.Pair;
 import expressions.exceptions.NumberSeriesGenerationException;
 
@@ -74,7 +75,8 @@ public class BatchApp {
 				series.toString(), forInduction.toString(), forCheck.toString()));
 		
 		long startTime = System.currentTimeMillis();
-		SimpleNumberSeriesDefinition inducedDef = SimpleNumberSeriesDefinition.induce2(forInduction, true);
+		BetterSimpleNumberSeriesInducer inducer = new BetterSimpleNumberSeriesInducer();
+		SimpleNumberSeriesDefinition inducedDef = inducer.induce(forInduction, true);
 		long time = System.currentTimeMillis() - startTime;
 		
 		boolean correct = true;

@@ -4,9 +4,9 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import expressions.exceptions.ExpressionCalculationException;
-
 import series.NumberSeries;
 import series.SimpleNumberSeriesDefinition;
+import series.inducers.SimpleNumberSeriesInducer;
 
 
 public class ConsoleApp {
@@ -21,7 +21,7 @@ public class ConsoleApp {
 	    
 	    
 	    // parse parameters
-	    if(args.length<=0 || args.length>2) {
+	    if(args.length<=0 || args.length>3) {
 	    	System.out.println(getUsage());
 	    	System.exit(-1);
 	    }
@@ -49,7 +49,8 @@ public class ConsoleApp {
 				Logger.getRootLogger().setLevel(Level.TRACE);
 			} 
 		}
-	    SimpleNumberSeriesDefinition def = SimpleNumberSeriesDefinition.induce(series, depth);
+		SimpleNumberSeriesInducer inducer = new SimpleNumberSeriesInducer();
+		SimpleNumberSeriesDefinition def = inducer.induce(series, depth);
 
 	    if(def==null)
 	    	System.out.println(String.format("No Definition found for %s", series.toString()));
