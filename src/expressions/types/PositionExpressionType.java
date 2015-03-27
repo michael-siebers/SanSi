@@ -47,6 +47,8 @@ public class PositionExpressionType extends ValueExpressionType {
 	public String getDummyRepresentation() {
 		return "<Pos>";
 	}
+	
+	PositionExpressionType() {};
 
 
 }

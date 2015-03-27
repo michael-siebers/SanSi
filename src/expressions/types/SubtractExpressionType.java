@@ -4,7 +4,7 @@ import expressions.exceptions.ExpressionCalculationException;
 
 public class SubtractExpressionType extends BinaryExpressionType {
 
-	public SubtractExpressionType() {
+	SubtractExpressionType() {
 		super("", "-", "", false);
 	}
 

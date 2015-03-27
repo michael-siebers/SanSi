@@ -1,11 +1,11 @@
 package expressions;
 
 import series.NumberSeries;
-import expressions.types.PositionExpressionType;
+import expressions.types.ExpressionTypeBuilder;
 
 public class PositionValue extends ValueExpression {
 	public PositionValue() {
-		super(new PositionExpressionType());
+		super(ExpressionTypeBuilder.getPosType());
 	}
 	
 	@Override

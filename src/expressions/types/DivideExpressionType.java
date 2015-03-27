@@ -4,7 +4,7 @@ import expressions.exceptions.ExpressionCalculationException;
 
 public class DivideExpressionType extends BinaryExpressionType {
 
-	public DivideExpressionType() {
+	DivideExpressionType() {
 		super("", "/", "", false);
 	}
 

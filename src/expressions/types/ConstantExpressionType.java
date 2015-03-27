@@ -31,6 +31,10 @@ public class ConstantExpressionType extends ValueExpressionType{
 		
 	}
 	
+	ConstantExpressionType() {
+		// do nothing
+	}
+	
 	@Override
 	public ValueExpression fitTo(NumberSeries original, NumberSeries predicted) {
 		int guess = predicted.get(0);

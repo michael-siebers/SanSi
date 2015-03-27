@@ -1,13 +1,13 @@
 package expressions;
 
 import series.NumberSeries;
-import expressions.types.ConstantExpressionType;
+import expressions.types.ExpressionTypeBuilder;
 
 public class ConstantValue extends ValueExpression{
 	private int value;
 	
 	public ConstantValue(int val) {
-		super(new ConstantExpressionType());
+		super(ExpressionTypeBuilder.getConType());
 		value = val;
 	}
 

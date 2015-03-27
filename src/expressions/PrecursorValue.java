@@ -1,14 +1,14 @@
 package expressions;
 
 import series.NumberSeries;
-import expressions.types.PrecursorExpressionType;
+import expressions.types.ExpressionTypeBuilder;
 
 public class PrecursorValue extends ValueExpression {
 
 	private int offset;
 	
 	public PrecursorValue(int offset) {
-		super(new PrecursorExpressionType());
+		super(ExpressionTypeBuilder.getPreType());
 		
 		if(offset<1)
 			throw new IllegalArgumentException("Must at least go one back.");

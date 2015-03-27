@@ -8,7 +8,7 @@ public class PowerExpressionType extends BinaryExpressionType {
 	static private BigInteger maxInt = BigInteger.valueOf(Integer.MAX_VALUE);
 	static private BigInteger minInt = BigInteger.valueOf(Integer.MIN_VALUE);
 	
-	public PowerExpressionType() {
+	PowerExpressionType() {
 		super("", "^", "", false);
 	}
 

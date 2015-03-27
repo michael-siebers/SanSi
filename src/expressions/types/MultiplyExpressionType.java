@@ -4,7 +4,7 @@ import expressions.exceptions.ExpressionCalculationException;
 
 public class MultiplyExpressionType extends BinaryExpressionType {
 
-	public MultiplyExpressionType() {
+	MultiplyExpressionType() {
 		super("", "*", "", true);
 	}
 	

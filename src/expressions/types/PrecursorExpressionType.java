@@ -64,5 +64,7 @@ public class PrecursorExpressionType extends ValueExpressionType {
 	public String getDummyRepresentation() {
 		return "x_{n-?}";
 	}
+	
+	PrecursorExpressionType() {};
 
 }

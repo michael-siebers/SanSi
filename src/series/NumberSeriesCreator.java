@@ -23,6 +23,7 @@ import expressions.exceptions.NumberSeriesGenerationException;
 import expressions.types.AddExpressionType;
 import expressions.types.BinaryExpressionType;
 import expressions.types.DivideExpressionType;
+import expressions.types.ExpressionTypeBuilder;
 import expressions.types.MultiplyExpressionType;
 import expressions.types.PowerExpressionType;
 import expressions.types.SubtractExpressionType;
@@ -76,11 +77,11 @@ public class NumberSeriesCreator {
 	static private final Object TOKEN_NUMBER_SERIES = new Object();
 	
 	// types
-	static private final BinaryExpressionType ADD = new AddExpressionType();
-	static private final BinaryExpressionType SUBTRACT = new SubtractExpressionType();
-	static private final BinaryExpressionType MULTIPLY = new MultiplyExpressionType();
-	static private final BinaryExpressionType DIVIDE = new DivideExpressionType();
-	static private final BinaryExpressionType POWER = new PowerExpressionType();
+	static private final BinaryExpressionType ADD = ExpressionTypeBuilder.getAddType();
+	static private final BinaryExpressionType SUBTRACT = ExpressionTypeBuilder.getSubType();
+	static private final BinaryExpressionType MULTIPLY = ExpressionTypeBuilder.getMulType();
+	static private final BinaryExpressionType DIVIDE = ExpressionTypeBuilder.getDivType();
+	static private final BinaryExpressionType POWER = ExpressionTypeBuilder.getPowType();
 	
 	
 	

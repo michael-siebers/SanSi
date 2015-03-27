@@ -11,6 +11,9 @@ import expressions.ValueExpression;
 
 public class NumberSeriesExpressionType extends ValueExpressionType {
 
+	NumberSeriesExpressionType() {
+	}
+	
 	@Override
 	public ValueExpression fitTo(NumberSeries original, NumberSeries predicted) {
 		if(original.size() == predicted.size())

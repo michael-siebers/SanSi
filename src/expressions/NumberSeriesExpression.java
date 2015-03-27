@@ -4,7 +4,7 @@ import series.NumberSeries;
 import series.NumberSeriesDefinition;
 import expressions.exceptions.ExpressionCalculationException;
 import expressions.exceptions.NumberSeriesGenerationException;
-import expressions.types.NumberSeriesExpressionType;
+import expressions.types.ExpressionTypeBuilder;
 
 public class NumberSeriesExpression extends ValueExpression {
 	private NumberSeriesDefinition def;
@@ -39,7 +39,7 @@ public class NumberSeriesExpression extends ValueExpression {
 	
 	
 	public NumberSeriesExpression(NumberSeriesDefinition def, int offset) {
-		super(new NumberSeriesExpressionType());
+		super(ExpressionTypeBuilder.getNumType());
 		this.def = def;
 		this.offset = offset;
 	}

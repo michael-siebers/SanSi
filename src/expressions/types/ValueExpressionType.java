@@ -7,7 +7,7 @@ import expressions.ValueExpression;
 
 abstract public class ValueExpressionType extends ExpressionType {
 
-	public ValueExpressionType() {
+	ValueExpressionType() {
 		super();
 	}
 

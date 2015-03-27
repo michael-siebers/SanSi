@@ -4,7 +4,7 @@ import expressions.exceptions.ExpressionCalculationException;
 
 public class NegateExpressionType extends UnaryExpressionType {
 
-	public NegateExpressionType() {
+	NegateExpressionType() {
 		super("-", "");
 	}
 

@@ -10,14 +10,17 @@ public abstract class BinaryExpressionType extends ExpressionType {
 	private String operatorSuffix;
 	
 	private boolean commutative;
+	private int neutral;
 	
 	public BinaryExpressionType(String operatorPrefix, String operatorInfix, 
 			String operatorSuffix, boolean commutative) {
+		// Todo add neutral as argument
 		super();
 		this.operatorPrefix = operatorPrefix;
 		this.operatorInfix = operatorInfix;
 		this.operatorSuffix = operatorSuffix;
 		this.commutative = commutative;
+		//this.neutral = neutral;
 	}
 
 	abstract public int applyBinary(int first, int second)
@@ -29,6 +32,10 @@ public abstract class BinaryExpressionType extends ExpressionType {
 
 	public boolean isCommutative() {
 		return commutative;
+	}
+	
+	public int getNeutralElement() {
+		return neutral;
 	}
 	
 	public abstract int reverseOperator(int first, int result) throws ExpressionCalculationException;

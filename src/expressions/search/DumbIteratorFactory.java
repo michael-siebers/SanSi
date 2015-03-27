@@ -12,6 +12,7 @@ import expressions.types.AddExpressionType;
 import expressions.types.BinaryExpressionType;
 import expressions.types.ConstantExpressionType;
 import expressions.types.ExpressionType;
+import expressions.types.ExpressionTypeBuilder;
 import expressions.types.MultiplyExpressionType;
 import expressions.types.NegateExpressionType;
 import expressions.types.NumberSeriesExpressionType;
@@ -22,18 +23,18 @@ import expressions.types.UnaryExpressionType;
 import expressions.types.ValueExpressionType;
 
 public class DumbIteratorFactory {
-	private static final PowerExpressionType POWER = new PowerExpressionType();
+	private static final PowerExpressionType POWER = ExpressionTypeBuilder.getPowType();
 
-	private static final MultiplyExpressionType MULTIPLY = new MultiplyExpressionType();
+	private static final MultiplyExpressionType MULTIPLY = ExpressionTypeBuilder.getMulType();
 
-	private static final AddExpressionType ADD = new AddExpressionType();
+	private static final AddExpressionType ADD = ExpressionTypeBuilder.getAddType();
 
 	static final Logger logger = Logger.getLogger(DumbIteratorFactory.class);
 	
-	static final private ValueExpressionType CONST = new ConstantExpressionType();
-	static final private ValueExpressionType PRE = new PrecursorExpressionType();
-	static final private ValueExpressionType POS = new PositionExpressionType();
-	static final private ValueExpressionType NS = new NumberSeriesExpressionType();
+	static final private ValueExpressionType CONST = ExpressionTypeBuilder.getConType();
+	static final private ValueExpressionType PRE = ExpressionTypeBuilder.getPreType();
+	static final private ValueExpressionType POS = ExpressionTypeBuilder.getPosType();
+	static final private ValueExpressionType NS = ExpressionTypeBuilder.getNumType();
 	
 	static final List<ValueExpressionType>  valueList = new ArrayList<ValueExpressionType>();
 	static final List<UnaryExpressionType>  unaryList = new ArrayList<UnaryExpressionType>();
@@ -93,32 +94,32 @@ public class DumbIteratorFactory {
 	
 	
 	static {
-		valueList.add(new PrecursorExpressionType());
-		valueList.add(new PositionExpressionType());
-		valueList.add(new NumberSeriesExpressionType());
+		valueList.add(PRE);
+		valueList.add(POS);
+		valueList.add(NS);
 		
-		unaryList.add(new NegateExpressionType());
+		unaryList.add(ExpressionTypeBuilder.getNegType());
 		
 		binaryList.add(ADD);
 		binaryList.add(MULTIPLY);
 	//	binaryList.add(new DivideExpressionType());
 		binaryList.add(POWER);
 		
-		leftCommTypes.add(new PrecursorExpressionType()); rightCommTypes.add(new ConstantExpressionType());
-		leftCommTypes.add(new PrecursorExpressionType()); rightCommTypes.add(new PrecursorExpressionType());
-		leftCommTypes.add(new PositionExpressionType()); rightCommTypes.add(new ConstantExpressionType());
-		leftCommTypes.add(new PositionExpressionType()); rightCommTypes.add(new PrecursorExpressionType());
+		leftCommTypes.add(PRE); rightCommTypes.add(CONST);
+		leftCommTypes.add(PRE); rightCommTypes.add(PRE);
+		leftCommTypes.add(POS); rightCommTypes.add(CONST);
+		leftCommTypes.add(POS); rightCommTypes.add(PRE);
 		
-		leftTypes.add(new PrecursorExpressionType()); rightTypes.add(new ConstantExpressionType());
-		leftTypes.add(new PrecursorExpressionType()); rightTypes.add(new PrecursorExpressionType());
-		leftTypes.add(new PrecursorExpressionType()); rightTypes.add(new PositionExpressionType());
+		leftTypes.add(PRE); rightTypes.add(CONST);
+		leftTypes.add(PRE); rightTypes.add(PRE);
+		leftTypes.add(PRE); rightTypes.add(POS);
 		
-		leftTypes.add(new PositionExpressionType()); rightTypes.add(new ConstantExpressionType());
-		leftTypes.add(new PositionExpressionType()); rightTypes.add(new PrecursorExpressionType());
-		leftTypes.add(new PositionExpressionType()); rightTypes.add(new PositionExpressionType());
+		leftTypes.add(POS); rightTypes.add(CONST);
+		leftTypes.add(POS); rightTypes.add(PRE);
+		leftTypes.add(POS); rightTypes.add(POS);
 		
-		leftTypes.add(new ConstantExpressionType()); rightTypes.add(new PrecursorExpressionType());
-		leftTypes.add(new ConstantExpressionType()); rightTypes.add(new PositionExpressionType());
+		leftTypes.add(CONST); rightTypes.add(PRE);
+		leftTypes.add(CONST); rightTypes.add(POS);
 	}
 	
 	
