@@ -1,5 +1,8 @@
 package series.inducers;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import series.NumberSeries;
@@ -59,5 +62,57 @@ public class BetterSimpleNumberSeriesInducer {
 		}
 		logger.debug("leaving BetterSimpleNumberSeriesInducer.induce(NumberSeries, boolean)");
 		return null;		
+	}
+	
+	/**
+	 * Collect all definitions which can be induced for this number series.
+	 * 
+	 * Here "all" refers to the search space defined for KI 2012.
+	 * 
+	 * @param series The series for which a definition shall be induced.
+	 * @param allowSubseries
+	 * @return
+	 */
+	public List<SimpleNumberSeriesDefinition> collectDefinitions (NumberSeries series, boolean allowSubseries) {
+		logger.debug("entering BetterSimpleNumberSeriesInducer.collectDefinitions(NumberSeries, boolean)");
+		if (series == null) 
+			throw new IllegalAccessError("Argument 'series' is null.");
+		
+		List<SimpleNumberSeriesDefinition> result = new LinkedList<SimpleNumberSeriesDefinition>();
+		
+		/* the maximal initial size depends on the available
+		 * numbers. To induce and check a series with n predecessors
+		 * there must be n initial numbers, n numbers to induce the 
+		 * regularity and 1 number to validate the definition  
+		 * 
+		 * Limited to 5. Bigger numbers seem psychological unplausible
+		 */
+		int maxInitialSize = //Math.min((series.size()-1)/2, 5);
+			series.size()/3;
+
+		for(int with = 0; with <= (allowSubseries?1:0); with++) {
+			for (int initialSize = 0; initialSize<=maxInitialSize;initialSize++) {
+				NumberSeries toPredict = series.getSubsequence(initialSize,
+						series.size());
+				ExpressionTreeIterator treeIt = 
+					(with==1)?DumbIteratorFactory.nsIterator():DumbIteratorFactory.naiveIterator();
+				logger.info(String.format(
+							"Trying with %d initials",
+							initialSize));
+				while (treeIt.hasNext()) {
+					ExpressionTree nextTree = treeIt.next();
+					logger.debug(String.format(
+							"Trying with %d initials: %s",
+							initialSize, nextTree.toString()));
+					Expression instanced = nextTree.fitTo(series, toPredict);
+					if (instanced != null) {
+						result.add(new SimpleNumberSeriesDefinition(series
+								.getSubsequence(0, initialSize), instanced));
+					}
+				}
+			}
+		}
+		logger.debug("leaving BetterSimpleNumberSeriesInducer.collectDefinitions(NumberSeries, boolean)");
+		return result;		
 	}
 }
