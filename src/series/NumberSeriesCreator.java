@@ -20,13 +20,8 @@ import expressions.NumberSeriesExpression;
 import expressions.PositionValue;
 import expressions.PrecursorValue;
 import expressions.exceptions.NumberSeriesGenerationException;
-import expressions.types.AddExpressionType;
 import expressions.types.BinaryExpressionType;
-import expressions.types.DivideExpressionType;
 import expressions.types.ExpressionTypeBuilder;
-import expressions.types.MultiplyExpressionType;
-import expressions.types.PowerExpressionType;
-import expressions.types.SubtractExpressionType;
 
 public class NumberSeriesCreator {
 	
@@ -460,15 +455,16 @@ public class NumberSeriesCreator {
 			boolean internExcludePower = excludePower
 					|| binType.equals(POWER);
 
+			// binary expression types are singletons
 			List<Expression> invalid = new LinkedList<Expression>();
-			if(!(binType instanceof PowerExpressionType))
+			if(!(binType == POWER))
 				invalid.addAll(toExclude);
 			
-			if ((binType instanceof AddExpressionType || binType instanceof SubtractExpressionType)
-					&& (toplevelType instanceof AddExpressionType || toplevelType instanceof SubtractExpressionType))
+			if ((binType == ADD || binType == SUBTRACT)
+					&& (toplevelType == ADD || toplevelType == SUBTRACT))
 				invalid.addAll(expandAdditive(toExclude));
-			else if ((binType instanceof MultiplyExpressionType || binType instanceof DivideExpressionType)
-					&& (toplevelType instanceof MultiplyExpressionType || toplevelType instanceof DivideExpressionType))
+			else if ((binType == MULTIPLY || binType == DIVIDE)
+					&& (toplevelType == MULTIPLY || toplevelType == DIVIDE))
 				invalid.addAll(expandMultiplicative(toExclude));
 
 			Expression left;
@@ -480,12 +476,12 @@ public class NumberSeriesCreator {
 				continue;
 			}
 
-			if (binType instanceof AddExpressionType
-					|| binType instanceof SubtractExpressionType)
+			if (binType == ADD
+					|| binType == SUBTRACT)
 				invalid.addAll(expandAdditive(Collections
 						.singletonList(left)));
-			else if (binType instanceof MultiplyExpressionType
-					|| binType instanceof DivideExpressionType)
+			else if (binType == MULTIPLY
+					|| binType == DIVIDE)
 				invalid.addAll(expandMultiplicative(Collections
 						.singletonList(left)));
 			else
@@ -521,7 +517,7 @@ public class NumberSeriesCreator {
 			BinaryOperator binOp = (BinaryOperator) expr;
 			BinaryExpressionType binType = (BinaryExpressionType) binOp.getType();
 			
-			if (binType instanceof AddExpressionType || binType instanceof SubtractExpressionType) {
+			if (binType == ADD || binType == SUBTRACT) {
 				result.addAll(expandAdditive(Collections.singletonList(binOp.getLeftChild())));	
 				result.addAll(expandAdditive(Collections.singletonList(binOp.getRightChild())));	
 			}
@@ -542,7 +538,7 @@ public class NumberSeriesCreator {
 			BinaryOperator binOp = (BinaryOperator) expr;
 			BinaryExpressionType binType = (BinaryExpressionType) binOp.getType();
 			
-			if (binType instanceof MultiplyExpressionType || binType instanceof DivideExpressionType) {
+			if (binType == MULTIPLY || binType == DIVIDE) {
 				result.addAll(expandMultiplicative(Collections.singletonList(binOp.getLeftChild())));	
 				result.addAll(expandMultiplicative(Collections.singletonList(binOp.getRightChild())));	
 			}
