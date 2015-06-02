@@ -7,27 +7,18 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import expressions.ExpressionTree;
-import expressions.exceptions.ExpressionCalculationException;
-import expressions.types.AddExpressionType;
 import expressions.types.BinaryExpressionType;
-import expressions.types.ConstantExpressionType;
 import expressions.types.ExpressionType;
 import expressions.types.ExpressionTypeBuilder;
-import expressions.types.MultiplyExpressionType;
-import expressions.types.NegateExpressionType;
-import expressions.types.NumberSeriesExpressionType;
-import expressions.types.PositionExpressionType;
-import expressions.types.PowerExpressionType;
-import expressions.types.PrecursorExpressionType;
 import expressions.types.UnaryExpressionType;
 import expressions.types.ValueExpressionType;
 
 public class DumbIteratorFactory {
-	private static final PowerExpressionType POWER = ExpressionTypeBuilder.getPowType();
+	private static final BinaryExpressionType POWER = ExpressionTypeBuilder.getPowType();
 
-	private static final MultiplyExpressionType MULTIPLY = ExpressionTypeBuilder.getMulType();
+	private static final BinaryExpressionType MULTIPLY = ExpressionTypeBuilder.getMulType();
 
-	private static final AddExpressionType ADD = ExpressionTypeBuilder.getAddType();
+	private static final BinaryExpressionType ADD = ExpressionTypeBuilder.getAddType();
 
 	static final Logger logger = Logger.getLogger(DumbIteratorFactory.class);
 	

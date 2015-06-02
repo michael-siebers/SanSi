@@ -2,21 +2,19 @@ package gui;
 
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.AbstractListModel;
-import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -39,16 +37,7 @@ import series.NumberSeries;
 import series.NumberSeriesDefinition;
 import series.SimpleNumberSeriesDefinition;
 import series.inducers.BetterSimpleNumberSeriesInducer;
-import expressions.BinaryOperator;
-import expressions.ConstantValue;
-import expressions.PrecursorValue;
 import expressions.exceptions.NumberSeriesGenerationException;
-import expressions.types.AddExpressionType;
-import expressions.types.MultiplyExpressionType;
-
-import javax.swing.JPanel;
-
-import java.awt.FlowLayout;
 
 public class MultipleSeriesOriginalInduction extends JFrame {
 
