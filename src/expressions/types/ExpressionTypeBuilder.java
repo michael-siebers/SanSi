@@ -9,6 +9,19 @@ public class ExpressionTypeBuilder {
 	 * Calculators
 	 * 
 	 */
+	private static final UnaryCalculator Negate = new UnaryCalculator() {
+		
+		@Override
+		public int apply(int arg) throws ExpressionCalculationException {
+			
+			try {
+				return IntMath.negate(arg);
+			} catch (ArithmeticException e) {
+				throw new ExpressionCalculationException(e);
+			}
+		}
+	};
+	
 	private static final BinaryCalculator FirstPlusSecond = new BinaryCalculator() {
 		@Override
 		public int apply(int first, int second) throws ExpressionCalculationException {
@@ -196,7 +209,7 @@ public class ExpressionTypeBuilder {
 	private static ValueExpressionType[] valueTypes = { conType, numType, posType, preType}; 
 	
 	// unary types
-	private static NegateExpressionType negType = new NegateExpressionType();
+	private static UnaryExpressionType negType = new UnaryExpressionType("-", "", Negate, Negate); 
 	private static UnaryExpressionType[] unaryTypes = {negType};
 		
 	// binary types
@@ -226,7 +239,7 @@ public class ExpressionTypeBuilder {
 	public static PrecursorExpressionType getPreType() {
 		return preType;
 	}
-	public static NegateExpressionType getNegType() {
+	public static UnaryExpressionType getNegType() {
 		return negType;
 	}
 	public static BinaryExpressionType getAddType() {

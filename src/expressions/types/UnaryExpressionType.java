@@ -4,25 +4,34 @@ import expressions.Expression;
 import expressions.UnaryOperator;
 import expressions.exceptions.ExpressionCalculationException;
 
-public abstract class UnaryExpressionType extends ExpressionType {
+public class UnaryExpressionType extends ExpressionType {
 	private String operatorPrefix;
 	private String operatorSuffix;
 	
-	public UnaryExpressionType(String operatorPrefix,
-			String operatorSuffix) {
+	private final UnaryCalculator resultCalculator;
+	private final UnaryCalculator reverseCalculator;
+	
+	public UnaryExpressionType(String operatorPrefix, String operatorSuffix, 
+			UnaryCalculator result, UnaryCalculator reverse) {
 		super();
 
 		this.operatorPrefix = operatorPrefix;
 		this.operatorSuffix = operatorSuffix;
+		this.resultCalculator = result;
+		this.reverseCalculator = reverse;
 	}
 
-	public abstract int applyOperator(int arg) throws ExpressionCalculationException;
+	public int applyOperator(int arg) throws ExpressionCalculationException {
+		return this.resultCalculator.apply(arg);
+	}
 
 	public String formatExpressionType(String argument) {
 		return operatorPrefix + argument + operatorSuffix;
 	}
 
-	public abstract int reverseOperator(int result) throws ExpressionCalculationException;
+	public int reverseOperator(int result) throws ExpressionCalculationException {
+		return this.reverseCalculator.apply(result);
+	}
 
 	public int getRequiredNumberOfSubexpressions() {
 		return 1;
