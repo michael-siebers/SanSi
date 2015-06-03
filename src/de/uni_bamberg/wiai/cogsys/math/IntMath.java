@@ -130,7 +130,7 @@ public class IntMath {
 	 */
 	public static int exp(int x, int n) throws ArithmeticException {
 		if (n<0) 
-			throw new IllegalArgumentException("Only defined for non-negative exponents!");
+			throw new ArithmeticException("Only defined for non-negative exponents!");
 		return internal_exp_by_squaring(x, n);
 	}
 	
