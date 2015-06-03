@@ -62,5 +62,11 @@ public class PrecursorValue extends ValueExpression {
 				(totalExpressions==1)?"":String.format("%d", totalExpressions), offset);
 	}
 	
-
+	/**
+	 * Precursor values cannot be normalized further
+	 */
+	@Override
+	public Expression normalize() {
+		return this;
+	}
 }

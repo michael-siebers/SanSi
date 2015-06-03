@@ -11,14 +11,23 @@ public class UnaryExpressionType extends ExpressionType {
 	private final UnaryCalculator resultCalculator;
 	private final UnaryCalculator reverseCalculator;
 	
+	private final boolean selfinverse;
+	
 	public UnaryExpressionType(String operatorPrefix, String operatorSuffix, 
-			UnaryCalculator result, UnaryCalculator reverse) {
+			UnaryCalculator result, UnaryCalculator reverse, boolean selfinverse) {
 		super();
 
 		this.operatorPrefix = operatorPrefix;
 		this.operatorSuffix = operatorSuffix;
 		this.resultCalculator = result;
 		this.reverseCalculator = reverse;
+		this.selfinverse = selfinverse;
+	}
+
+
+
+	public boolean isSelfinverse() {
+		return selfinverse;
 	}
 
 	public int applyOperator(int arg) throws ExpressionCalculationException {

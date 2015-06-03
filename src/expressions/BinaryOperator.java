@@ -103,5 +103,60 @@ public class BinaryOperator extends	Expression {
 		return secondChild;
 	}
 
+
+
+	/*
+	 * TODO:
+	 * - combine multiple operator applications (if possible)
+	 * @see expressions.Expression#normalize()
+	 */
+	@Override
+	public Expression normalize() throws ExpressionCalculationException {
+		Expression innerFirst = firstChild.normalize();
+		Expression innerSecond = secondChild.normalize();
+		
+		// apply on constants
+		if((innerFirst instanceof ConstantValue)
+				&& (innerSecond instanceof ConstantValue) ) {
+			int firstVal =  ((ConstantValue) innerFirst).getValue();
+			int secondVal =  ((ConstantValue) innerSecond).getValue();
+			return new ConstantValue(binaryType.applyBinary(firstVal, secondVal));
+		}
+		
+		// remove neutral element
+		if(innerSecond instanceof ConstantValue) {
+			int secondVal =  ((ConstantValue) innerSecond).getValue();
+			if(secondVal == binaryType.getNeutralElement())
+				return innerFirst;
+		} else if (binaryType.isCommutative() && (innerFirst instanceof ConstantValue)) {
+			int firstVal =  ((ConstantValue) innerFirst).getValue();
+			if(firstVal == binaryType.getNeutralElement())
+				return innerSecond;
+		}
+		
+		// reorder subexpressions (if operator is commutative)
+		if(binaryType.isCommutative()) {
+			if(innerFirst instanceof ConstantValue) { 
+				// if both were constant the operator would have been applied
+				// so do nothing unchanged
+			} else if (innerSecond instanceof ConstantValue) {
+				// only the second is a constant bring it to front
+				final Expression innerTmp = innerFirst;
+				innerFirst = innerSecond;
+				innerSecond = innerTmp;
+			} else {
+				// no constants
+				// order subexpressions according to depth
+				if(innerSecond.getDepth()<innerFirst.getDepth()) {
+					final Expression innerTmp = innerFirst;
+					innerFirst = innerSecond;
+					innerSecond = innerTmp;
+				}
+			}
+		}
+		
+		return this.binaryType.getExpression(innerFirst, innerSecond);
+	}
+
 	
 }

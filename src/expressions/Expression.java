@@ -10,6 +10,9 @@ import expressions.exceptions.NumberSeriesGenerationException;
 import expressions.exceptions.TooFewPrecursorsException;
 import expressions.types.ExpressionType;
 
+/**
+ * A complete instantiated expression
+ */
 public abstract class Expression {
 	Logger logger = Logger.getLogger(Expression.class);
 	
@@ -94,4 +97,16 @@ public abstract class Expression {
 	
 	abstract public boolean equals(Object obj);
 	abstract public int hashCode();
+	
+	/**
+	 * Normalize an expression. Returns a new expression. The original expression is unchanged.
+	 * 
+	 * Normalization includes: 
+	 * - removal of unneccesary constants
+	 * - removal of unneccesary operators
+	 * - reordering of subexpressions (right child is always as deep as or deeper than the left child)
+	 * 
+	 * @return new expression
+	 */
+	abstract public Expression normalize() throws ExpressionCalculationException;
 }

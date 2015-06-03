@@ -12,6 +12,12 @@ import expressions.types.ExpressionType;
 import expressions.types.UnaryExpressionType;
 import expressions.types.ValueExpressionType;
 
+/**
+ * A tree of expression types
+ * 
+ * @author Michael Siebers
+ *
+ */
 public class ExpressionTree {
 	static private Logger logger = Logger.getLogger(ExpressionTree.class);
 	
@@ -155,6 +161,7 @@ public class ExpressionTree {
 		return null;
 	}
 	
+	// TODO move this into expression types (if possible)!
 	public Expression fitTo(NumberSeries original,
 			NumberSeries predicted) {
 		if(type instanceof ValueExpressionType) {

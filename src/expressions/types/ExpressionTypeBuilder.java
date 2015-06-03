@@ -209,7 +209,7 @@ public class ExpressionTypeBuilder {
 	private static ValueExpressionType[] valueTypes = { conType, numType, posType, preType}; 
 	
 	// unary types
-	private static UnaryExpressionType negType = new UnaryExpressionType("-", "", Negate, Negate); 
+	private static UnaryExpressionType negType = new UnaryExpressionType("-", "", Negate, Negate, true); 
 	private static UnaryExpressionType[] unaryTypes = {negType};
 		
 	// binary types

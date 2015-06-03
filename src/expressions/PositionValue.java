@@ -40,6 +40,12 @@ public class PositionValue extends ValueExpression {
 		return true;
 	}
 	
-	
+	/**
+	 * Position values cannot be normalized further
+	 */
+	@Override
+	public Expression normalize() {
+		return this;
+	}
 	
 }

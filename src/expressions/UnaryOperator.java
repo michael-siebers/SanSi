@@ -76,5 +76,34 @@ public class UnaryOperator extends Expression {
 		return true;
 	}
 
+	/**
+	 * Get this unary operators subexpression
+	 * @return
+	 */
+	Expression getSubExpression() {
+		return subExpression;
+	}
+	
+	@Override
+	public Expression normalize() throws ExpressionCalculationException {
+		Expression innerExpression = subExpression.normalize();
+		
+		// apply to constant
+		if(innerExpression instanceof ConstantValue) {
+			ConstantValue cValue = (ConstantValue) innerExpression;
+			int innerValue =  cValue.getValue();
+			return new ConstantValue(unaryType.applyOperator(innerValue));
+		}
+		
+		// eliminate double application (if operation is self inverse)
+		if(unaryType.isSelfinverse() && (innerExpression instanceof UnaryOperator)) {
+			UnaryOperator unOp = (UnaryOperator) innerExpression;
+			if(unOp.getType() == unaryType)
+				return unOp.getSubExpression();
+		}
+		return this.unaryType.getExpression(innerExpression);
+	}
+
+	
 
 }

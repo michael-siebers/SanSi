@@ -5,7 +5,7 @@ import expressions.types.ExpressionTypeBuilder;
 
 public class ConstantValue extends ValueExpression{
 	private int value;
-	
+
 	public ConstantValue(int val) {
 		super(ExpressionTypeBuilder.getConType());
 		value = val;
@@ -48,6 +48,24 @@ public class ConstantValue extends ValueExpression{
 		return true;
 	}
 
+	/**
+	 * Get the represented constant value.
+	 * 
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
+	}
+	
+	/**
+	 * Constant values cannot be normalized further
+	 */
+	@Override
+	public Expression normalize() {
+		return this;
+	}
+	
+	
 	
 	
 }

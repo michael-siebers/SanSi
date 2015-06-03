@@ -69,5 +69,15 @@ public class NumberSeriesExpression extends ValueExpression {
 	public int requiredPrecursors() {
 		return offset;
 	}
-
+	
+	/*
+	 * TODO:
+	 * - normalize number series definition
+	 * 
+	 * @see expressions.Expression#normalize()
+	 */
+	@Override
+	public Expression normalize() {
+		throw new UnsupportedOperationException();
+	}
 }
