@@ -63,3 +63,6 @@ The format of the series file follows the [input format of BatchApp](#input-form
 
 #### Definition File Format
 The definition file contains one definition per line. The definition starts with the name of the series (as in the series file) followed by a semi-colon (;). The the series definition is printed as in the output of [ConsoleApp](#consoleapp).
+
+## Resources
+Additional to the applications, the repository contains resources used and created for the KI2012 paper. The file [KI2012-series-and-results.zip](resources/KI2012-series-and-results.zip) contains the 25,000 number series definitions the system was tested on and the test results.
